@@ -24,11 +24,22 @@ all_month_name = {
     "dec": "this for December"   
 }
 
+def index(request):
+    
+    months = list(all_month_name.keys())
+    return render(request, "webpage/index.html", {
+        "months" : months
+    })
+   
+
 def all_months(request, month):
     try:
         text = all_month_name[month]
-        response_data = f"<h1>{text}<h1>"
-        return HttpResponse(response_data)
+        return render(request, "webpage/webpage.html",{
+            'text': text,
+            'month_name': month
+        })
+        
     except:
         HttpResponseNotFound("<h1>invalid entery!<h1>")
     

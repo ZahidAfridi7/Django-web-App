@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseNotFound,HttpResponseRedirect
+from django.urls import reverse
 
 
 # def jan(request):
@@ -26,19 +27,21 @@ all_month_name = {
 def all_months(request, month):
     try:
         text = all_month_name[month]
-        return HttpResponse(text)
+        response_data = f"<h1>{text}<h1>"
+        return HttpResponse(response_data)
     except:
-        HttpResponseNotFound("invalid entery!")
+        HttpResponseNotFound("<h1>invalid entery!<h1>")
     
     
 def all_months_by_num(request, month):
     months = list(all_month_name.keys())
     
     if month > len(months):
-        return HttpResponseNotFound("invalid entery")
+        return HttpResponseNotFound("<h1>invalid entery<h1>")
     
     redirect_month = months[month - 1]
-    return HttpResponseRedirect("/webpage/" + redirect_month)
+    redirect_path = reverse("monthly-task", args=[redirect_month])
+    return HttpResponseRedirect(redirect_path)
     
     
     

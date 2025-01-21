@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ month_name |title }}</title>
-</head>
-<body>
+{%extends "base.html" %}
+
+{% block page_title %}
+{{ month_name |title }} 
+{% endblock  %}
+{% block contents  %}
+{%include "webpage/include/header.html"%}
     <h1>This is {{ month_name |title }} task</h1>
+    {%if text is not None %}
     <h2>{{ text }}</h2>
-</body>
-</html>
+    {% else %}
+    <h3>no tasks for {{ month_name }} month</h3>
+    {% endif %}
+{% endblock  %}

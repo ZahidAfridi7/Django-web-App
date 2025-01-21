@@ -1,15 +1,20 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
+{% load static %}
 
-{%block page_title%}
+{% block css_file %}
+<link rel="stylesheet" href="{% static 'webpage/webpage.css' %}">
+<link rel="stylesheet" href="{% static 'webpage/include/header.css' %}">
+{% endblock %}
+
+{% block page_title %}
     All Monthly Tasks
+{% endblock %}
 
-{%endblock%}
-
-{%block contents%}
-{%include "webpage/include/header.html"%}
+{% block contents %}
+{% include "webpage/include/header.html" %}
     <ul>
-        {% for month in months%}
-        <li><a href= "{% url "monthly-task" month %}"> {{ month | title }} </a> </li>
+        {% for month in months %}
+        <li><a href="{% url 'monthly-task' month %}"> {{ month|title }} </a></li>
         {% endfor %}
     </ul>
-{%endblock%}
+{% endblock %}
